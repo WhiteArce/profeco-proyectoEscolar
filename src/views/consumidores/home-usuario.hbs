@@ -1,0 +1,19 @@
+
+	<div class="row">
+		{{#each listaProductos}}
+		<div class="col-md-3">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title d-flex justify-content-between align-items-center">
+					<a href="/api/home-usuario/producto/{{_id}}">{{nombre}} </a>	
+					</h4>
+					<p>Su precio es: {{precio}}</p>
+					<p>{{descripcion}}</p>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+
+
+

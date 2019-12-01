@@ -1,0 +1,15 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">{{producto.nombre}}
+            <form action="/api/home-usuario/producto/wishlist/{{producto._id}}" method="POST">
+                <button class="btn btn-warning btn-sm ml-auto">Agregar a la wishlist</button>
+            </form>
+        </h1>
+        <p class="lead">{{producto.descripcion}}</p>
+        <br><br>
+        El precio es de: <b>{{producto.precio}}</b><br><br>
+        <button class="btn btn-outline-success btn-block">Comprar</button>
+
+
+    </div>
+</div>
