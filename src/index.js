@@ -33,13 +33,6 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
-
-
-
-
 //middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
