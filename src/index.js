@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash-plus/lib');
 const passport = require('passport');
+const hbs = require('hbs');
 
 //conectar a la BD
 require('./database');
@@ -17,6 +18,7 @@ const usersRoutes = require('./routes/users.routes');
 const productoRoutes = require('./routes/producto.routes');
 const marketRoutes = require('./routes/mercado.routes');
 require('./config/passport');
+require('handlebars-form-helpers').register(hbs.handlebars);
 
 
 //configuraciones

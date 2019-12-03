@@ -1,30 +1,32 @@
-	<div class="col-md-4 mx-auto">
-		<div class="card">
-			<div class="card-header">
-				<h3>Nuevo producto</h3>
-			</div>
-			<div class="card-body">
-				<form action="/api/home-mercado/agregar-producto" method="POST">
-					<div class="form-group">
-						<label>Nombre:</label>
-						<input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre" autofocus>
-					</div>
-					<div class="form-group">
-						<label>Precio:</label>
-						<input type="number" name="precio" class="form-control" placeholder="Ingresa el precio">
-					</div>
-					<div class="form-group">
-						<label>Descripción</label>
-						<textarea name="descripcion" class="form-control"
-							placeholder="Ingresa una descripción"></textarea><br>
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-outline-primary">Agregar</button>
-					</div>
-
-				</form>
-			</div>
+<div class="col-md-4 mx-auto">
+	<div class="card">
+		<div class="card-header">
+			<h3>Nuevo producto</h3>
 		</div>
-	</div><br><br>
+		<div class="card-body">
+			<form action="/api/home-mercado/agregar-producto" method="POST">
+				<div class="form-group">
+					<select class="form-control">
+						{{#each productos}}
+						<option>{{nombre}}</option>
+						{{/each}}
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Precio:</label>
+					{{#if productos}}
+					<input type="number" name="precio" class="form-control" value="{{precio}}" placeholder="Ingresa el precio">{{precio}}{{/if}}
+				</div>
+				<div class="form-group">
+					<label>Descripción</label>
+					<textarea name="descripcion" class="form-control"
+						placeholder="Ingresa una descripción"></textarea><br>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-outline-primary">Agregar</button>
+				</div>
 
-
+			</form>
+		</div>
+	</div>
+</div><br><br>
