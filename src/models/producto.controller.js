@@ -20,6 +20,9 @@ const productoEsquema = new esquema({
     },
     user: {
         type: String
+    },
+    comentario: {
+        type: String
     }
 
 });

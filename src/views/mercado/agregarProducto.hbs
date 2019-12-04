@@ -6,16 +6,20 @@
 		<div class="card-body">
 			<form action="/api/home-mercado/agregar-producto" method="POST">
 				<div class="form-group">
-					<select class="form-control">
+					<label>Nombre: </label>
+					<input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre">
+					
+					{{!-- <select class="form-control">
 						{{#each productos}}
 						<option>{{nombre}}</option>
 						{{/each}}
-					</select>
+					</select> --}}
+					
 				</div>
 				<div class="form-group">
 					<label>Precio:</label>
-					{{#if productos}}
-					<input type="number" name="precio" class="form-control" value="{{precio}}" placeholder="Ingresa el precio">{{precio}}{{/if}}
+			
+					<input type="number" name="precio" class="form-control" placeholder="Ingresa el precio">
 				</div>
 				<div class="form-group">
 					<label>Descripción</label>

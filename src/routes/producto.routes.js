@@ -34,14 +34,33 @@ router.post('/api/home-mercado/agregar-producto', isAuthenticated, async (req, r
     }
 });
 
-router.post('/api/home-usuario/producto/wishlist/:id', async (req, res) => {
-    const {nombre, precio, descripcion } = req.body;
-   const producto =  await Producto.findById({ nombre, precio, descripcion });
+router.post('/api/home-usuario/agregarComentario/:id', async (req, res) => {
+    const { comentario } = req.body;
+    const id = req.params.id;
+    const producto = await Producto.findById(id);
+    const comm = await producto.updateOne({ $push: { "comentario": comentario } });
+    console.log(comm);
 
-    await newWishlist.save(producto);
-    req.flash('success_msg', 'Se ha agregado a la wishlist');
-    res.redirect('/api/home-usuario/producto');
+    const listaProductos = await Producto.findById(id);
+    req.flash('success_msg', 'Comentario agregado');
+    res.redirect('/api/home-usuario');
+
+
 });
+
+// router.post('/api/home-usuario/producto/wishlist/:id', async (req, res) => {
+//     const {nombre, precio, descripcion } = req.body;
+//    const producto =  await Producto.findById({ nombre, precio, descripcion });
+
+//     await newWishlist.save(producto);
+//     req.flash('success_msg', 'Se ha agregado a la wishlist');
+//     res.redirect('/api/home-usuario/producto');
+// });
+
+// router.post('/api/home-usuario/agregarComentario', async (req, res) => {
+//     const { comentario } = req.body;
+//     const  
+// });
 
 router.put('/api/home-mercado/editar-producto/:id', isAuthenticated, async (req, res) => {
     const { nombre, precio, descripcion } = req.body;

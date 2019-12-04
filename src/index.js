@@ -7,6 +7,7 @@ const session = require('express-session');
 const flash = require('connect-flash-plus/lib');
 const passport = require('passport');
 const hbs = require('hbs');
+var bodyParser = require('body-parser');  
 
 //conectar a la BD
 require('./database');
@@ -44,6 +45,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+app.use(bodyParser.json());  
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());

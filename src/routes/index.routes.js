@@ -26,6 +26,8 @@ router.get('/api/home-mercado/editar-producto/:id', isAuthenticated, async (req,
 });
 router.get('/api/home-usuario/producto/:id', async (req, res) => {
     const producto = await Producto.findById(req.params.id);
+    console.log(producto);
+    
     res.render('./consumidores/producto-usuario', { producto });
 });
 
