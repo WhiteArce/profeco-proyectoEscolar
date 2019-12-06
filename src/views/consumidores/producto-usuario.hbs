@@ -1,23 +1,31 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">{{producto.nombre}}
-            <form action="/api/home-usuario/producto/wishlist/{{producto._id}}" method="POST">
-                <button class="btn btn-warning btn-sm ml-auto">Agregar a la wishlist</button>
-                
+        <h1 class="display-4">{{listaProductos.nombre}}
+            <form action="/api/home-usuario/producto/wishlist/{{listaProductos._id}}" method="POST">
+                <input type="hidden" name="nombre" class="form-control" value="{{listaProductos.nombre}}">
+                <input type="hidden" name="precio" class="form-control" value="{{listaProductos.precio}}">
+                <input type="hidden" name="descripcion" class="form-control" value="{{listaProductos.descripcion}}">
+                <button class="btn btn-warning btn-sm ml-auto">Agregar a wishlist</button>
+
             </form>
-            <form action="/api/home-usuario/favoritos/{{producto._id}}" method="POST">
+            <form action="/api/home-usuario/producto/favoritos/{{listaProductos._id}}" method="POST">
+                <input type="hidden" name="nombre" class="form-control" value="{{listaProductos.nombre}}">
+                <input type="hidden" name="precio" class="form-control" value="{{listaProductos.precio}}">
+                <input type="hidden" name="descripcion" class="form-control" value="{{listaProductos.descripcion}}">
                 <button class="btn btn-primary btn-sm mx-auto">Agregar a favoritos</button>
+
             </form>
         </h1>
-        <p class="lead">{{producto.descripcion}}</p>
+        <p class="lead">{{listaProductos.descripcion}}</p>
         <br><br>
-        El precio es de: <b>{{producto.precio}}</b><br><br>
+        El precio es de: <b>{{listaProductos.precio}}</b><br><br>
         <button class="btn btn-outline-success btn-block">Comprar</button>
-        <form action="/api/home-usuario/agregarComentario/{{producto._id}}" method="POST">
-            <textarea class="form-control" name="comentario" placeholder="Ingresa un comentario" cols="30" rows="5"></textarea>
+        <form action="/api/home-usuario/agregarComentario/{{listaProductos._id}}" method="POST">
+            <textarea class="form-control" name="comentario" placeholder="Ingresa un comentario" cols="30"
+                rows="5"></textarea>
             <button class="btn btn-primary btn-sm ml-auto">Enviar</button>
         </form>
-        
+
 
 
     </div>
@@ -25,12 +33,8 @@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-         {{#each producto}}
-        <h1>
-               
-                    {{comentario}}
-               
-        </h1>
-         {{/each}}
+
+      
+
     </div>
 </div>

@@ -1,21 +1,18 @@
 const mongoose = require('mongoose');
 const esquema = mongoose.Schema;
 
-const carritoEsquema = new esquema({
-    id: {
-        type: String
-    },
+const wishlistEsquema = new esquema({
     nombre: {
         type: String,
-       
+        required: true
     },
     precio: {
         type: Number,
-        
+        required: true
     },
     descripcion: {
         type: String,
-       
+        required: true
     },
     date: {
         type: Date,
@@ -23,9 +20,8 @@ const carritoEsquema = new esquema({
     },
     user: {
         type: String
-    }
-
+    },
 });
 
-module.exports = mongoose.model('carrito', carritoEsquema);
+module.exports = mongoose.model('wishlist', wishlistEsquema);
                             //nombre de la tabla

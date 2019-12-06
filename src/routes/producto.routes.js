@@ -4,6 +4,7 @@ const router = express.Router();
 const Producto = require('../models/producto.controller');
 const { isAuthenticated } = require('../helpers/auth');
 const Wishlist = require('../models/wishlist.controller');
+const Favoritos = require('../models/favoritos.controller');
 
 router.post('/api/home-mercado/agregar-producto', isAuthenticated, async (req, res) => {
     const { nombre, precio, descripcion } = req.body;
@@ -38,10 +39,10 @@ router.post('/api/home-usuario/agregarComentario/:id', async (req, res) => {
     const { comentario } = req.body;
     const id = req.params.id;
     const producto = await Producto.findById(id);
-    const comm = await producto.updateOne({ $push: { "comentario": comentario } });
+    const comm = await producto.updateOne({ $push: { "com": comentario } });
     console.log(comm);
 
-    const listaProductos = await Producto.findById(id);
+    
     req.flash('success_msg', 'Comentario agregado');
     res.redirect('/api/home-usuario');
 
@@ -61,6 +62,28 @@ router.post('/api/home-usuario/agregarComentario/:id', async (req, res) => {
 //     const { comentario } = req.body;
 //     const  
 // });
+
+router.post('/api/home-usuario/producto/favoritos/:id', isAuthenticated, async (req, res) => {
+    
+    const { nombre, precio, descripcion } = req.body;
+
+        const newFavorito = new Favoritos({ nombre, precio, descripcion });
+        newFavorito.user = req.user.id;
+        await newFavorito.save();
+        req.flash('success_msg', 'Agregado a favoritos');
+        res.redirect('/api/home-usuario');
+    
+});
+
+router.post('/api/home-usuario/producto/wishlist/:id', isAuthenticated, async (req, res) => {
+    const { nombre, precio, descripcion } = req.body;
+    
+    const newWishlist = new Wishlist({ nombre, precio, descripcion});
+    newWishlist.user = req.user.id;
+    await newWishlist.save();
+    req.flash('success_msg', 'Agregado wishlist');
+    res.redirect('/api/home-usuario');
+});
 
 router.put('/api/home-mercado/editar-producto/:id', isAuthenticated, async (req, res) => {
     const { nombre, precio, descripcion } = req.body;

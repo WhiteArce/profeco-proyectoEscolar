@@ -6,6 +6,8 @@ const Producto = require('../models/producto.controller');
 const Productos = require('../models/productos.controller');
 
 const { isAuthenticated } = require('../helpers/auth');
+const Favoritos = require('../models/favoritos.controller');
+const Wishlist = require('../models/wishlist.controller');
 
 
 router.get('/api/home-mercado/agregar-producto', isAuthenticated, async (req, res) => {
@@ -16,8 +18,19 @@ router.get('/api/home-mercado/agregar-producto', isAuthenticated, async (req, re
 
 router.get('/api/home-mercado', isAuthenticated, async (req, res) => {
     const listaProductos = await Producto.find({ user: req.user.id }).sort({ date: 'desc' });
-    
+
     res.render('./mercado/home-mercado', { listaProductos });
+});
+
+router.get('/api/home-usuario/favoritos', isAuthenticated, async (req, res) => {
+    const listaProductos = await Favoritos.find({ user: req.user.id }).sort({ date: 'desc' });
+    res.render('./consumidores/favoritos-usuario', { listaProductos });
+});
+
+router.get('/api/home-usuario/wishlist', isAuthenticated, async (req, res) => {
+    const listaProductos = await Wishlist.find({ user: req.user.id }).sort({ date: 'desc' });
+
+    res.render('./consumidores/wishlist-usuarios', { listaProductos });
 });
 
 router.get('/api/home-mercado/editar-producto/:id', isAuthenticated, async (req, res) => {
@@ -25,10 +38,10 @@ router.get('/api/home-mercado/editar-producto/:id', isAuthenticated, async (req,
     res.render('./mercado/editarProducto', { producto });
 });
 router.get('/api/home-usuario/producto/:id', async (req, res) => {
-    const producto = await Producto.findById(req.params.id);
-    console.log(producto);
-    
-    res.render('./consumidores/producto-usuario', { producto });
+    // const producto = await Producto.findById(req.params.id);
+    //console.log(producto);
+    const listaProductos = await Producto.findById(req.params.id);
+    res.render('./consumidores/producto-usuario', { listaProductos });
 });
 
 router.get('/api/home-usuario', isAuthenticated, async (req, res) => {
